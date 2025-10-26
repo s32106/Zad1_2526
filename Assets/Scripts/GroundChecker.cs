@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 /*** A script on a child of player character
 * It should have a small BoxCollider2D set to trigger to just touch the ground

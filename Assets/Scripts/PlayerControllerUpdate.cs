@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControllerUpdate : MonoBehaviour
@@ -35,6 +37,12 @@ public class PlayerControllerUpdate : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce);
         }
+        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.isGrounded)
+        {
+            //rb.AddForce(new Vector2(0,jumpForce));
+            rb.AddForce(Vector2.up * jumpForce);
+        }
+
     }
 
 }
