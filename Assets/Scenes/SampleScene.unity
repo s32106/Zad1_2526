@@ -575,9 +575,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72309f5226fe314190d66c5b25302cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 100
+  moveSpeed: 50
   jumpForce: 100
   isJump: 0
+  speed: 3
+  doublejump: 2
   rb: {fileID: 0}
   spriteRenderer: {fileID: 0}
   groundChecker: {fileID: 0}
