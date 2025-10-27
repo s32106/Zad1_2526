@@ -19,17 +19,11 @@ public class GroundChecker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("isGrounded"))
-        {
-            isGrounded = true;
-        }
+        isGrounded = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("isGrounded"))
-        {
-            isGrounded = false;
-        }
+        isGrounded = false;
     }
 
 
