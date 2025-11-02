@@ -577,7 +577,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1581474748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,12 +591,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 50
+  runSpeed: 7
   jumpForce: 100
-  isJump: 0
-  speed: 3
-  doublejump: 2
-  rb: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 1581474749}
   groundChecker: {fileID: 0}
 --- !u!212 &1581474749
 SpriteRenderer:

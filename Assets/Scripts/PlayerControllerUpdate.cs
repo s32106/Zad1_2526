@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerControllerUpdate : MonoBehaviour
 {
-    public float moveSpeed = 20;
+    public float moveSpeed = 5;
+    public float runSpeed = 7;
     public float jumpForce = 100;
     private float moveInput = 0;
-    public bool isJump = false;
-    public float speed = 3;
-    public float doublejump = 2;
 
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     public SpriteRenderer spriteRenderer;
+    private bool isSprint = false;
+    private float moveVector = 0;
+    private bool isJump = false;
+
     public GroundChecker groundChecker;
 
     void Start()
@@ -24,35 +26,36 @@ public class PlayerControllerUpdate : MonoBehaviour
 
     void Update()
     {
+        moveInput = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(moveInput * moveSpeed * Time.deltaTime, rb.velocity.y);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(Vector2.up * jumpForce);
-            isJump = true;
-        }
-
-    }
-
-    private void FixedUpdate()
-    {
-        float moveInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(speed * moveInput * moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
-        if (isJump && groundChecker.isGrounded)
-        {
-            rb.AddForce(Vector2.up * jumpForce);
-            isJump = false;
-        }
+        moveVector = Input.GetAxis("Horizontal");
 
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = 6;
+            isSprint = true;
         }
-        else
+        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.isGrounded)
         {
-            speed = 3;
+            isJump = true;
         }
 
     }
-
+    private void FixedUpdate()
+    {
+        if (isSprint)
+        {
+            rb.velocity = new Vector2(moveVector * runSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(moveVector * moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        }
+        if (isJump)
+        {
+            rb.AddForce(Vector2.up * jumpForce);
+            isJump = false;
+        }
+    }
 }
