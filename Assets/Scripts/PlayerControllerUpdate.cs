@@ -4,44 +4,53 @@ using UnityEngine;
 
 public class PlayerControllerUpdate : MonoBehaviour
 {
-    public float moveSpeed = 5;
+    public float moveSpeed = 20;
     public float runSpeed = 7;
     public float jumpForce = 100;
-    private float moveInput = 0;
-
-    private Rigidbody2D rb;
-    public SpriteRenderer spriteRenderer;
     private bool isSprint = false;
-    private float moveVector = 0;
     private bool isJump = false;
+    private float moveVector = 0;
 
+    public Rigidbody2D rb;
+    public SpriteRenderer spriteRenderer;
     public GroundChecker groundChecker;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
 
     void Update()
     {
-        moveInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveInput * moveSpeed * Time.deltaTime, rb.velocity.y);
-
+        //moveInput = Input.GetAxis("Horizontal");
         moveVector = Input.GetAxis("Horizontal");
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isJump = true;
+        }
+        
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
             isSprint = true;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.isGrounded)
+        else
         {
-            isJump = true;
+            isSprint = false;
+        }
+
+        if (moveVector < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
         }
 
     }
+
     private void FixedUpdate()
     {
         if (isSprint)
@@ -55,6 +64,10 @@ public class PlayerControllerUpdate : MonoBehaviour
         if (isJump)
         {
             rb.AddForce(Vector2.up * jumpForce);
+            isJump = false;
+        }
+        else
+        {
             isJump = false;
         }
     }
