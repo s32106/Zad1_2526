@@ -10,6 +10,13 @@ public class OpenDoor10c : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         anim.SetBool("Open", true);
